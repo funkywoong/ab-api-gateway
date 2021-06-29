@@ -1,5 +1,6 @@
 
 import 'reflect-metadata'; // We need this in order to use @Decorators
+import ejs from 'ejs'
 
 if (process.env.NODE_ENV == 'production') {
     require('module-alias/register');
@@ -20,8 +21,12 @@ async function startServer() {
    * Well, at least in node 10 without babel and at the time of writing
    * So we are using good old require.
    **/
-//   await loaders({ expressApp: app });
-  logger.info('Dependent modules loading completed!');
+  logger.info('Dependent modules loading completed!')
+
+  // Public asset rendering
+  // app.get('/', (req, res) => {
+  //   res.render('sample', {})
+  // });
 
   await loaders({ expressApp: app })
 

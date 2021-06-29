@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>ab-web-portal</title>
+        <meta charset="utf-8" \ />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" \ />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+        <link href="/css/style.css" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            * {
+                overflow: auto;
+            }
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                font-family: 'Roboto', sans-serif;
+                text-align: center;
+            }
+            header {
+                text-align: center;
+            }
+            h1 {
+                color: darkblue;
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="upload-info" enctype="multipart/form-data">
+            <div class="selection-target">
+                <div class="selection-wording">
+                    <h1>Select target to save vod contents :</h1>
+                </div>
+                <div class="selection-dropbox">
+                    <select id="target-storage" name="vodFile">
+                        <% var options = ["S3", "EFS"]; %>
+                        <% for(var i = 0; i <= options.length-1; i++) { %>
+                          <option value='<%= options[i] %>'><%= options[i] %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class="selection-file">
+                <div class="selection-wording">
+                    <h1>Browse file for uploading : </h1> 
+                    <input class="file-box" type="file" id="vod-file-tag0" name="vodFile">
+                </div>
+                <div class="selection-btn">
+                    <button class="submit-btn" type="button" onclick="uploadFile();">Upload</button>
+                </div>   
+            </div>
+        </form>
+        <script type="text/javascript" src="/main.js"></script>
+    </body>
+</html>

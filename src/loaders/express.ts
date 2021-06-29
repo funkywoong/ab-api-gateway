@@ -2,8 +2,10 @@ import express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import path from 'path'
 
 import routes from '@src/api'
+import publicRoute from '@src/public'
 import config from '@src/config';
 import logger from '@src/loaders/logger';
 
@@ -27,6 +29,13 @@ export default async ({ app }: { app: express.Application }) => {
 
     // Enable cors
     app.use(cors());
+
+    // Set ejs view
+    app.set("view engine", "ejs");
+    app.set("views", path.resolve(process.cwd(), 'src', 'views'))
+    app.use(express.static(path.resolve(process.cwd(), 'src', 'public')))
+
+    app.use('/', publicRoute())
 
     // Load api module
     app.use(config.API_PREFIX, routes());

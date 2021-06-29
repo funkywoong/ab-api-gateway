@@ -1,0 +1,86 @@
+.selection-target {
+    max-width: 100%;
+    margin: 10px;
+}
+
+.selection-file {
+    max-width: 100%;
+    margin: 10px;
+}
+
+.selection-btn {
+    max-width: 100%;
+    margin: 10px;
+}
+
+.selection-wording {
+    max-width: 100%;
+    display: inline-block;
+    padding-right: 10px;
+    padding: 10px;
+    /* position: relative;
+    top: 50%; 
+    transform: translate(0, -50%); */
+}
+
+.selection-dropbox {
+    display: inline-block;
+    max-width: 100%;
+    padding: 10px;
+    /* position: relative;
+    top: 50%; 
+    transform: translate(0, -50%); */
+}
+
+input.file-box {
+    max-width: 100%;
+    padding: 10px;
+    display: inline-block; 
+    padding: .5em .75em; 
+    color: #444; 
+    font-size: inherit; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: #fdfdfd; 
+    cursor: pointer; 
+    border: 1px solid #ebebeb; 
+    border-bottom-color: #e2e2e2; 
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: .25em;
+}
+
+button.submit-btn {
+    max-width: 100%;
+    padding: 10px;
+    display: inline-block; 
+    padding: .5em .75em; 
+    color: #444; 
+    font-size: inherit; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: #fdfdfd; 
+    cursor: pointer; 
+    border: 1px solid #ebebeb; 
+    border-bottom-color: #e2e2e2; 
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: .25em;
+}
+
+select {
+    /* 생략 */
+    font-family: "Noto Sansf KR", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  
+    color: #444;
+    background-color: #fdfdfd;
+  
+    padding: 0.6em 1.4em 0.5em 0.8em;
+    margin: 0;
+  
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2; 
+    border-radius: 0.5em;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}

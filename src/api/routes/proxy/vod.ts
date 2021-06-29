@@ -1,9 +1,8 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const passport = require('passport')
+import { createProxyMiddleware } from 'http-proxy-middleware'
+import logger from '@src/loaders/logger'
 
-const logger = require('../../../loaders/logger')
-
-const VOD_SERVICE_URL = "http://vod-service:3000"
+// const VOD_SERVICE_URL = "http://vod-service:3001"
+const VOD_SERVICE_URL = "http://localhost:3001"
 
 export default (app) => {
 
@@ -14,8 +13,7 @@ export default (app) => {
     }
 
     app.use(
-        '/users',
-        passport.authenticate('jwt', { session: false }), 
+        '/vod',
         createProxyMiddleware(filter, {
         target: VOD_SERVICE_URL,
         secure: false,
