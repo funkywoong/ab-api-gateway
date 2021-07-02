@@ -1,3 +1,49 @@
+.contents-list {
+    max-width: 100%;
+    /* width: 100%; */
+    display: flex;
+    max-height: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
+    border: 2px solid lightgray;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    /* background: linear-gradient(to right, 
+                                transparent 0%, 
+                                transparent calc(50% - 0.81px), 
+                                black calc(50% - 0.8px), 
+                                black calc(50% + 0.8px), 
+                                transparent calc(50% + 0.81px), 
+                                transparent 100%
+                                );  */
+}
+
+.contents-list-efs {
+    /* display: flex; */
+    /* max-width: max-content; */
+    /* display: max-content; */
+    max-width: 50%;
+    width: 50%;
+    border: 2px solid lightgray;
+    /* text-align: left; */
+}
+
+.contents-list-s3 {
+    /* display: flex; */
+    /* display: max-content; */
+    /* margin-left: 50%; */
+    max-width: 50%;
+    width: 50%;
+    border: 2px solid lightgray;
+    /* text-align: left; */
+}
+
 .selection-target {
     max-width: 100%;
     margin: 10px;
@@ -66,6 +112,13 @@ button.submit-btn {
     border-radius: .25em;
 }
 
+button.refresh-btn {
+    width: max-content;
+    height: max-content;
+    background: None;
+    border: None;
+}
+
 select {
     /* 생략 */
     font-family: "Noto Sansf KR", sans-serif;
@@ -83,4 +136,36 @@ select {
     border-bottom-color: #e2e2e2; 
     border-radius: 0.5em;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
+ul.mylist, ol.mylist {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+    padding: 0px;
+    max-width: max-content;
+    width: 100%;
+}
+
+ul.mylist li, ol.mylist li {
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 15px;
+}
+
+ul.mylist li:last-child,
+ol.mylist li:last-child {
+    border-bottom: 0px;
+}
+
+ul.mylist li:before,
+ol.mylist li:before {
+    content: "> ";
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 5px 6px 0px;
 }

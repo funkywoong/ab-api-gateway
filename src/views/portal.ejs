@@ -26,33 +26,94 @@
                 color: darkblue;
                 display: inline;
             }
+            h2 {
+                color: darkblue;
+                display: inline;
+            }
         </style>
     </head>
     <body>
-        <form id="upload-info" enctype="multipart/form-data">
-            <div class="selection-target">
-                <div class="selection-wording">
-                    <h1>Select target to save vod contents :</h1>
+        <div class="selection">
+            <form id="upload-info" enctype="multipart/form-data">
+                <div class="selection-target">
+                    <div class="selection-wording">
+                        <h1>Select target to save vod contents :</h1>
+                    </div>
+                    <div class="selection-dropbox">
+                        <select id="target-storage" name="vodFile">
+                            <% var options = ["S3", "EFS"]; %>
+                            <% for(var i = 0; i <= options.length-1; i++) { %>
+                              <option value='<%= options[i] %>'><%= options[i] %></option>
+                            <% } %>
+                        </select>
+                    </div>
                 </div>
-                <div class="selection-dropbox">
-                    <select id="target-storage" name="vodFile">
-                        <% var options = ["S3", "EFS"]; %>
-                        <% for(var i = 0; i <= options.length-1; i++) { %>
-                          <option value='<%= options[i] %>'><%= options[i] %></option>
-                        <% } %>
-                    </select>
+                <div class="selection-file">
+                    <div class="selection-wording">
+                        <h1>Browse file for uploading : </h1> 
+                        <input class="file-box" type="file" id="vod-file-tag0" name="vodFile">
+                    </div>
+                    <div class="selection-btn">
+                        <button class="submit-btn" type="button" onclick="uploadFile();">Upload</button>
+                    </div>   
+                </div>
+            </form>
+        </div>
+        <div class="contents-list">
+            <div class="contents-list-efs">
+                <div class="contents-list-efs-title">
+                    <h2>VOD Contents list from EFS</h2> 
+                    <button type="button" id="refresh-btn" class="refresh-btn" onclick="refreshEFSList();">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="contents-list-efs-items">
+                    <ul id="efs-mylist" class="mylist">
+                    </ul>
                 </div>
             </div>
-            <div class="selection-file">
-                <div class="selection-wording">
-                    <h1>Browse file for uploading : </h1> 
-                    <input class="file-box" type="file" id="vod-file-tag0" name="vodFile">
+            <div class="contents-list-s3">
+                <h2>VOD Contents list from S3</h2>
+                <button type="button" id="refresh-btn" class="refresh-btn" onclick="refreshS3List();">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                    </svg>
+                </button>
+                <div class="contents-list-s3-items">
+                    <ul id="s3-mylist" class="mylist">
+                        <script>
+                            $.ajax({
+                                url: '/api/vod/',
+                                        processData: false,
+                                        contentType: false,
+                                        type: 'GET',
+                                        success: function(result){
+                                            const listInfo = result['message']['results']
+                                            console.log(listInfo.size)
+
+                                            for (key in listInfo) {
+                                                var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
+                                                ${listInfo[key].vod_asset_id}</li>`
+                                                $('#s3-mylist').append(child)
+                                            }
+                                        },
+                                        error:function(request, status, error){
+                                            alert(
+                                                "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                                            );
+                                        }
+                            });
+                        </script>
+                    </ul>
                 </div>
-                <div class="selection-btn">
-                    <button class="submit-btn" type="button" onclick="uploadFile();">Upload</button>
-                </div>   
             </div>
-        </form>
+        </div>
         <script type="text/javascript" src="/main.js"></script>
     </body>
 </html>

@@ -28,5 +28,31 @@ function uploadFile() {
                     }
         });
     }
+}
 
+function refreshEFSList() {
+
+}
+
+function refreshS3List() {
+    $.ajax({
+        url: '/api/vod/',
+                processData: false,
+                contentType: false,
+                type: 'GET',
+                success: function(result){
+                    const listInfo = result['message']['results']
+                    $("#s3-mylist").empty()
+                    for (key in listInfo) {
+                        console.log('in for')
+                        var child = `<li><strong>${listInfo[key].vod_name}:</strong> ${listInfo[key].vod_asset_id}</li>`
+                        $("#s3-mylist").append(child)
+                    }
+                },
+                error:function(request, status, error){
+                    alert(
+                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                    );
+                }
+    });
 }
