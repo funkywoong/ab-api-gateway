@@ -1,8 +1,8 @@
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import logger from '@src/loaders/logger'
 
-// const VOD_SERVICE_URL = "http://ab-efs-service:3002"
-const EFS_SERVICE_URL = "http://localhost:3002"
+const VOD_SERVICE_URL = "http://ab-efs-service:3002"
+// const EFS_SERVICE_URL = "http://localhost:3002"
 
 export default (app) => {
 
