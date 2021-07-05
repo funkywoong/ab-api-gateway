@@ -60,7 +60,7 @@ function refreshEFSList() {
             for (key in listInfo) {
                 console.log('in for')
                 var child = `<li><strong>${listInfo[key].vod_name}:</strong> ${listInfo[key].vod_asset_id}</li>`
-                $("#s3-mylist").append(child)
+                $("#efs-mylist").append(child)
             }
         },
         error:function(request, status, error){
