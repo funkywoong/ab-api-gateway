@@ -73,6 +73,29 @@
                 </div>
                 <div class="contents-list-efs-items">
                     <ul id="efs-mylist" class="mylist">
+                        <script>
+                            $.ajax({
+                                url: '/api/efs/',
+                                processData: false,
+                                contentType: false,
+                                type: 'GET',
+                                success: function(result){
+                                    const listInfo = result['message']['results']
+                                    console.log(listInfo.size)
+
+                                    for (key in listInfo) {
+                                        var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
+                                        ${listInfo[key].vod_asset_id}</li>`
+                                        $('#efs-mylist').append(child)
+                                    }
+                                },
+                                error:function(request, status, error){
+                                    alert(
+                                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                                    );
+                                }
+                            });
+                        </script>
                     </ul>
                 </div>
             </div>
@@ -90,24 +113,24 @@
                         <script>
                             $.ajax({
                                 url: '/api/vod/',
-                                        processData: false,
-                                        contentType: false,
-                                        type: 'GET',
-                                        success: function(result){
-                                            const listInfo = result['message']['results']
-                                            console.log(listInfo.size)
+                                processData: false,
+                                contentType: false,
+                                type: 'GET',
+                                success: function(result){
+                                    const listInfo = result['message']['results']
+                                    console.log(listInfo.size)
 
-                                            for (key in listInfo) {
-                                                var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
-                                                ${listInfo[key].vod_asset_id}</li>`
-                                                $('#s3-mylist').append(child)
-                                            }
-                                        },
-                                        error:function(request, status, error){
-                                            alert(
-                                                "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                                            );
-                                        }
+                                    for (key in listInfo) {
+                                        var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
+                                        ${listInfo[key].vod_asset_id}</li>`
+                                        $('#s3-mylist').append(child)
+                                    }
+                                },
+                                error:function(request, status, error){
+                                    alert(
+                                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                                    );
+                                }
                             });
                         </script>
                     </ul>
