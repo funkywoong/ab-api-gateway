@@ -121,9 +121,14 @@
                                     console.log(listInfo.size)
 
                                     for (key in listInfo) {
-                                        var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
-                                        ${listInfo[key].vod_asset_id}</li>`
-                                        $('#s3-mylist').append(child)
+                                        const assetId = listInfo[key].vod_asset_id
+                                        const vodName = listInfo[key].vod_name
+                                        const profOption = ['360', '540', '720']
+                                        for (var i=0; i<3; i++) {
+                                            var child = `<li><a href=\"javascript:reqCfCookieUrl(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
+                                            ${assetId}</li>`
+                                            $('#s3-mylist').append(child)
+                                        }
                                     }
                                 },
                                 error:function(request, status, error){
