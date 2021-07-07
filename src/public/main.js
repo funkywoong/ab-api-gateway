@@ -78,12 +78,18 @@ function refreshS3List() {
         contentType: false,
         type: 'GET',
         success: function(result){
+            $("#s3-mylist").empty()
             const listInfo = result['message']['results']
-            $("#efs-mylist").empty()
+
             for (key in listInfo) {
-                console.log('in for')
-                var child = `<li><strong>${listInfo[key].vod_name}:</strong> ${listInfo[key].vod_asset_id}</li>`
-                $("#efs-mylist").append(child)
+                const assetId = listInfo[key].vod_asset_id
+                const vodName = listInfo[key].vod_name
+                const profOption = ['360', '540', '720']
+                for (var i=0; i<3; i++) {
+                    var child = `<li><a href=\"javascript:reqCfCookieUrl(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
+                    ${assetId}</li>`
+                    $('#s3-mylist').append(child)
+                }
             }
         },
         error:function(request, status, error){
@@ -106,25 +112,8 @@ function reqCfCookieUrl(assetInfo) {
             const tgUrl = result['message']['key']
             const signedCookie = result['message']['cookie']
             
-            console.log(signedCookie)
             await setCookie(signedCookie)
-            // console.log(tgUrl)
-            // window.location.href = tgUrl
-            console.log(location.origin)
-            $.ajax({
-                url: tgUrl,
-                processData: false,
-                contentType: false,
-                type: 'GET',
-                success: async function(result){
-                    console.log(result)
-                },
-                error:function(request, status, error){
-                    alert(
-                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                    );
-                }
-            });
+            window.open(tgUrl).focus()
         },
         error:function(request, status, error){
             alert(
@@ -145,15 +134,9 @@ async function setCookie(cookieObj) {
         document.cookie = CF_SIGN + "=" + ''
         
 
-        // document.cookie = CF_POLICY + "=" + cookieObj[CF_POLICY] + "; domain=cdn-s3.ab-aihelper.xyz"
-        // document.cookie = CF_KP_ID + "=" + cookieObj[CF_KP_ID] + "; domain=cdn-s3.ab-aihelper.xyz"
-        // document.cookie = CF_SIGN + "=" + cookieObj[CF_SIGN] + "; domain=cdn-s3.ab-aihelper.xyz"
-
-        document.cookie = CF_POLICY + "=" + cookieObj[CF_POLICY]
-        document.cookie = CF_KP_ID + "=" + cookieObj[CF_KP_ID]
-        document.cookie = CF_SIGN + "=" + cookieObj[CF_SIGN]
-
-        console.log(document.cookie)
+        document.cookie = CF_POLICY + "=" + cookieObj[CF_POLICY] + "; domain=.ab-aihelper.xyz"
+        document.cookie = CF_KP_ID + "=" + cookieObj[CF_KP_ID] + "; domain=.ab-aihelper.xyz"
+        document.cookie = CF_SIGN + "=" + cookieObj[CF_SIGN] + "; domain=.ab-aihelper.xyz"
 
         resolve(null)
     })
