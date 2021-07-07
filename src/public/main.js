@@ -57,10 +57,13 @@ function refreshEFSList() {
         success: function(result){
             const listInfo = result['message']['results']
             $("#efs-mylist").empty()
+        
             for (key in listInfo) {
-                console.log('in for')
-                var child = `<li><strong>${listInfo[key].vod_name}:</strong> ${listInfo[key].vod_asset_id}</li>`
-                $("#efs-mylist").append(child)
+                const assetId = listInfo[key].vod_asset_id
+                const vodName = listInfo[key].vod_name
+                var child = `<li><a href=\"javascript:reqCfCookieUrlForEFS(\'${assetId}\')\"><strong>${vodName}:</strong></a> \
+                ${listInfo[key].vod_asset_id}</li>`
+                $('#efs-mylist').append(child)
             }
         },
         error:function(request, status, error){
@@ -86,7 +89,7 @@ function refreshS3List() {
                 const vodName = listInfo[key].vod_name
                 const profOption = ['360', '540', '720']
                 for (var i=0; i<3; i++) {
-                    var child = `<li><a href=\"javascript:reqCfCookieUrl(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
+                    var child = `<li><a href=\"javascript:reqCfCookieUrlForS3(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
                     ${assetId}</li>`
                     $('#s3-mylist').append(child)
                 }
@@ -100,11 +103,32 @@ function refreshS3List() {
     });
 }
 
-function reqCfCookieUrl(assetInfo) {
+function reqCfCookieUrlForS3(assetInfo) {
     const assetId = assetInfo.split('_')[0]
     const profile = assetInfo.split('_')[1]
     $.ajax({
         url: `/api/vod/${assetId}/${profile}/cf-key`,
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        success: async function(result){
+            const tgUrl = result['message']['key']
+            const signedCookie = result['message']['cookie']
+            
+            await setCookie(signedCookie)
+            window.open(tgUrl).focus()
+        },
+        error:function(request, status, error){
+            alert(
+                "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+            );
+        }
+    });
+}
+
+function reqCfCookieUrlForEFS(assetId) {
+    $.ajax({
+        url: `/api/efs/assets/${assetId}`,
         processData: false,
         contentType: false,
         type: 'GET',

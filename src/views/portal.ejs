@@ -7,6 +7,7 @@
         <link href="/css/style.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="bin/jquery.ajax-cross-origin.min.js"></script>
+        <script type="text/javascript" src="/main.js"></script>
         <style>
             * {
                 overflow: auto;
@@ -75,27 +76,29 @@
                 <div class="contents-list-efs-items">
                     <ul id="efs-mylist" class="mylist">
                         <script>
-                            $.ajax({
-                                url: '/api/efs/',
-                                processData: false,
-                                contentType: false,
-                                type: 'GET',
-                                success: function(result){
-                                    const listInfo = result['message']['results']
-                                    console.log(listInfo.size)
-
-                                    for (key in listInfo) {
-                                        var child = `<li><strong>${listInfo[key].vod_name}:</strong> \
-                                        ${listInfo[key].vod_asset_id}</li>`
-                                        $('#efs-mylist').append(child)
-                                    }
-                                },
-                                error:function(request, status, error){
-                                    alert(
-                                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                                    );
-                                }
-                            });
+                            // $.ajax({
+                            //     url: '/api/efs/',
+                            //     processData: false,
+                            //     contentType: false,
+                            //     type: 'GET',
+                            //     success: function(result){
+                            //         const listInfo = result['message']['results']
+                                    
+                            //         for (key in listInfo) {
+                            //             const assetId = listInfo[key].vod_asset_id
+                            //             const vodName = listInfo[key].vod_name
+                            //             var child = `<li><a href=\"javascript:reqCfCookieUrlForEFS(\'${assetId}\')\"><strong>${vodName}:</strong></a> \
+                            //             ${listInfo[key].vod_asset_id}</li>`
+                            //             $('#efs-mylist').append(child)
+                            //         }
+                            //     },
+                            //     error:function(request, status, error){
+                            //         alert(
+                            //             "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                            //         );
+                            //     }
+                            // });
+                            refreshEFSList()
                         </script>
                     </ul>
                 </div>
@@ -112,36 +115,36 @@
                 <div class="contents-list-s3-items">
                     <ul id="s3-mylist" class="mylist">
                         <script>
-                            $.ajax({
-                                url: '/api/vod/',
-                                processData: false,
-                                contentType: false,
-                                type: 'GET',
-                                success: function(result){
-                                    const listInfo = result['message']['results']
+                            // $.ajax({
+                            //     url: '/api/vod/',
+                            //     processData: false,
+                            //     contentType: false,
+                            //     type: 'GET',
+                            //     success: function(result){
+                            //         const listInfo = result['message']['results']
 
-                                    for (key in listInfo) {
-                                        const assetId = listInfo[key].vod_asset_id
-                                        const vodName = listInfo[key].vod_name
-                                        const profOption = ['360', '540', '720']
-                                        for (var i=0; i<3; i++) {
-                                            var child = `<li><a href=\"javascript:reqCfCookieUrl(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
-                                            ${assetId}</li>`
-                                            $('#s3-mylist').append(child)
-                                        }
-                                    }
-                                },
-                                error:function(request, status, error){
-                                    alert(
-                                        "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                                    );
-                                }
-                            });
+                            //         for (key in listInfo) {
+                            //             const assetId = listInfo[key].vod_asset_id
+                            //             const vodName = listInfo[key].vod_name
+                            //             const profOption = ['360', '540', '720']
+                            //             for (var i=0; i<3; i++) {
+                            //                 var child = `<li><a href=\"javascript:reqCfCookieUrlForS3(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
+                            //                 ${assetId}</li>`
+                            //                 $('#s3-mylist').append(child)
+                            //             }
+                            //         }
+                            //     },
+                            //     error:function(request, status, error){
+                            //         alert(
+                            //             "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
+                            //         );
+                            //     }
+                            // });
+                            refreshS3List()
                         </script>
                     </ul>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="/main.js"></script>
     </body>
 </html>
