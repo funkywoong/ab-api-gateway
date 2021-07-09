@@ -1,8 +1,8 @@
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import logger from '@src/loaders/logger'
 
-// const VOD_SERVICE_URL = "http://ab-vod-service:3001"
-const VOD_SERVICE_URL = "http://localhost:3001"
+const VOD_SERVICE_URL = "http://ab-vod-service:3001"
+// const VOD_SERVICE_URL = "http://localhost:3001"
 
 export default (app) => {
 
