@@ -175,12 +175,7 @@ function loadTestToEFS() {
             url: '/api/efs/',
             processData: false,
             contentType: false,
-            type: 'GET',
-            error:function(request, status, error){
-                alert(
-                    "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                );
-            }
+            type: 'GET'
         });
         console.log(cnt)
         if (cnt > 100) {
@@ -199,12 +194,7 @@ function loadTestToS3() {
             url: '/api/vod/',
             processData: false,
             contentType: false,
-            type: 'GET',
-            error:function(request, status, error){
-                alert(
-                    "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                );
-            }
+            type: 'GET'
         });
         console.log(cnt)
         if (cnt > 100) {
