@@ -15,4 +15,5 @@ RUN npm install
 COPY . .
 
 # Execute node app
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]
+CMD ["npm", "run", "devStart"]

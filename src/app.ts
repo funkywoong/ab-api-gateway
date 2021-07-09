@@ -2,6 +2,10 @@
 import 'reflect-metadata'; // We need this in order to use @Decorators
 import ejs from 'ejs'
 
+if (process.env.TMP_ENV == 'test') {
+  require('module-alias/register')
+}
+
 if (process.env.NODE_ENV == 'production') {
     require('module-alias/register');
 }
