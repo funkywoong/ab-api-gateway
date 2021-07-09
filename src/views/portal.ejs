@@ -76,28 +76,6 @@
                 <div class="contents-list-efs-items">
                     <ul id="efs-mylist" class="mylist">
                         <script>
-                            // $.ajax({
-                            //     url: '/api/efs/',
-                            //     processData: false,
-                            //     contentType: false,
-                            //     type: 'GET',
-                            //     success: function(result){
-                            //         const listInfo = result['message']['results']
-                                    
-                            //         for (key in listInfo) {
-                            //             const assetId = listInfo[key].vod_asset_id
-                            //             const vodName = listInfo[key].vod_name
-                            //             var child = `<li><a href=\"javascript:reqCfCookieUrlForEFS(\'${assetId}\')\"><strong>${vodName}:</strong></a> \
-                            //             ${listInfo[key].vod_asset_id}</li>`
-                            //             $('#efs-mylist').append(child)
-                            //         }
-                            //     },
-                            //     error:function(request, status, error){
-                            //         alert(
-                            //             "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                            //         );
-                            //     }
-                            // });
                             refreshEFSList()
                         </script>
                     </ul>
@@ -115,36 +93,17 @@
                 <div class="contents-list-s3-items">
                     <ul id="s3-mylist" class="mylist">
                         <script>
-                            // $.ajax({
-                            //     url: '/api/vod/',
-                            //     processData: false,
-                            //     contentType: false,
-                            //     type: 'GET',
-                            //     success: function(result){
-                            //         const listInfo = result['message']['results']
-
-                            //         for (key in listInfo) {
-                            //             const assetId = listInfo[key].vod_asset_id
-                            //             const vodName = listInfo[key].vod_name
-                            //             const profOption = ['360', '540', '720']
-                            //             for (var i=0; i<3; i++) {
-                            //                 var child = `<li><a href=\"javascript:reqCfCookieUrlForS3(\'${assetId}_${profOption[i]}\')\"><strong>${vodName}_${profOption[i]}:</strong></a> \
-                            //                 ${assetId}</li>`
-                            //                 $('#s3-mylist').append(child)
-                            //             }
-                            //         }
-                            //     },
-                            //     error:function(request, status, error){
-                            //         alert(
-                            //             "code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error
-                            //         );
-                            //     }
-                            // });
                             refreshS3List()
                         </script>
                     </ul>
                 </div>
             </div>
         </div>
+        <div class="selection-btn">
+            <button class="submit-btn" type="button" onclick="loadTestToEFS();">Load Test of EFS Service</button>
+        </div>
+        <div class="selection-btn">
+            <button class="submit-btn" type="button" onclick="loadTestToS3();">Load Test of VOD Service</button>
+        </div>   
     </body>
 </html>
